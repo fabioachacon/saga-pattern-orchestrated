@@ -35,25 +35,10 @@ public class KafkaConfig {
     private String bootstrapServers;
 
     @Value("${spring.kafka.consumer.group-id}")
-    private String groudId;
+    private String groupId;
 
     @Value("${spring.kafka.consumer.auto-offset-reset}")
     private String autoOffsetReset;
-
-    @Value("${spring.kafka.consumer.orchestrator}")
-    private String orchestratorTopic;
-
-    @Value("${spring.kafka.consumer.inventory-success}")
-    private String inventorySuccessTopic;
-
-    @Value("${spring.kafka.consumer.inventory-fail}")
-    private String inventoryFailTopic;
-
-    @Value("${spring.kafka.topic.product-validation-success}")
-    private String productValidationSuccessTopic;
-
-    @Value("${spring.kafka.topic.product-validation-fail}")
-    private String productValidationFailTopic;
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
@@ -63,7 +48,7 @@ public class KafkaConfig {
     private Map<String, Object> consumerProps() {
         var props = new HashMap<String, Object>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, groudId);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetReset);
@@ -71,7 +56,7 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ProducerFactory<String, String> propucerFactory() {
+    public ProducerFactory<String, String> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerProps());
     }
 

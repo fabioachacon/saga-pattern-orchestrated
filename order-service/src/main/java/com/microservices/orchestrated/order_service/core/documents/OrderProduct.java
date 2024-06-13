@@ -1,0 +1,13 @@
+package com.microservices.orchestrated.order_service.core.documents;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderProduct {
+    private Product product;
+    private int quantity;
+}

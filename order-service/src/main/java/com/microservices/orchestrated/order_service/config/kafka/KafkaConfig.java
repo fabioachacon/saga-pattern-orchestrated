@@ -47,10 +47,10 @@ public class KafkaConfig {
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(consumerProps());
+        return new DefaultKafkaConsumerFactory<>(getConsumerProps());
     }
 
-    private Map<String, Object> consumerProps() {
+    private Map<String, Object> getConsumerProps() {
         var props = new HashMap<String, Object>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groudId);
@@ -62,10 +62,10 @@ public class KafkaConfig {
 
     @Bean
     public ProducerFactory<String, String> propucerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerProps());
+        return new DefaultKafkaProducerFactory<>(getProducerProps());
     }
 
-    private Map<String, Object> producerProps() {
+    private Map<String, Object> getProducerProps() {
         var props = new HashMap<String, Object>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -76,7 +76,6 @@ public class KafkaConfig {
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate(ProducerFactory<String, String> producerFactory) {
         return new KafkaTemplate<String, String>(producerFactory);
-
     }
 
     @Bean
